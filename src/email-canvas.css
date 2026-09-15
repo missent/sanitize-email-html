@@ -1,0 +1,92 @@
+/* Email Canvas Surface: Clean, readable light paper canvas isolated from dark chrome */
+.email-canvas-wrapper {
+  width: 100%;
+  max-width: 860px;
+  margin: 1rem auto;
+  box-sizing: border-box;
+}
+
+.email-canvas {
+  background-color: #ffffff !important;
+  color: #1f2328 !important;
+  border-radius: 8px;
+  padding: clamp(1rem, 2.5vw, 1.75rem);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.email-canvas {
+  box-sizing: border-box;
+  /* Paint containment prevents hostile spacing/sizing from painting on chrome.
+     Inline-size containment lets sender media layouts shrink with the reader. */
+  contain: inline-size paint;
+  isolation: isolate;
+}
+
+/* Width containment only: oversized sender media and tables shrink into
+   the reader instead of overflowing surrounding chrome. */
+.email-canvas :where(img, table) {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Containment only: long unbroken sender strings may wrap anywhere so cell
+   content cannot force horizontal overflow. */
+.email-canvas :where(td, th) {
+  overflow-wrap: anywhere;
+}
+
+/* Width caps below contain sender media and tables inside the reader
+   without restyling them (layout containment, not appearance). */
+.email-canvas table {
+  max-width: 100%;
+}
+
+/* Sender text colors cascade naturally: inheriting (rather than assigning)
+   lets sender-specified ancestor colors reach nested content exactly as sent.
+   Sender inline/stylesheet colors always win over this inheritance. */
+.email-canvas p,
+.email-canvas div,
+.email-canvas span,
+.email-canvas td,
+.email-canvas th,
+.email-canvas li,
+.email-canvas h1,
+.email-canvas h2,
+.email-canvas h3,
+.email-canvas h4,
+.email-canvas h5,
+.email-canvas h6 {
+  color: inherit;
+}
+
+/* No paragraph, heading, or list spacing is assigned here by design: sender
+   paragraphs, headings, and lists render with native browser spacing (plus
+   sender inline styles) so sender spacing is untouched. In particular sender
+   list bullets are never stripped. */
+
+/* Long sender links must wrap inside the reader instead of forcing
+   horizontal overflow (layout containment). Link colors are never assigned
+   here: sender inline colors render exactly as sent, and anything unstyled
+   keeps the browser default. */
+.email-canvas a,
+.email-canvas .email-body-link {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* Image containment only: oversized sender images scale down into the
+   reader while keeping their own aspect ratio. No display, alignment, or
+   alt-text styling is assigned, so sender image presentation is untouched. */
+.email-canvas img,
+.email-canvas .email-body-image {
+  max-width: 100% !important;
+  height: auto !important;
+}
